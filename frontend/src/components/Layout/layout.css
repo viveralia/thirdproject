@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Prata&display=swap');
+
+/*********************************/
+/********* CSS VARIABLES *********/
+/*********************************/
+:root {
+  --serif: 'Prata', serif;
+  --sans: -apple-system, 'Helvetica Neue', sans-serif;
+  --black: #040402;
+  --washedBlack: #6c757d;
+  --background: #fffefc;
+  --action: #fcda13;
+  --actionAlpha: rgba(252, 218, 19, 0.725);
+  --border: 1px solid #eee;
+  --maxWidth: 1125px;
+}
+
+/*********************************/
+/************* RESET *************/
+/*********************************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--actionAlpha);
+}
+
+::selection {
+  background: var(--washedBlack);
+  color: #fff;
+}
+
+body {
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  color: var(--washedBlack);
+  line-height: 1.5;
+  background: var(--background);
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+@media (min-width: 992px) {
+  html {
+    font-size: 17.5px;
+  }
+}
