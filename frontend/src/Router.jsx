@@ -4,7 +4,8 @@ import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Email from './pages/Form/Email'
 import Instagram from './pages/Form/Instagram'
-import Bio from './pages/Form/Bio'
+import LinkedIn from './pages/Form/LinkedIn'
+import Password from './pages/Form/Password'
 
 const Router = () => {
   return (
@@ -14,7 +15,8 @@ const Router = () => {
         {/* Multistep Form */}
         <Route exact path='/signup/email' component={Email} />
         <Route exact path='/signup/instagram' component={Instagram} />
-        <Route exact path='/signup/about' component={Bio} />
+        <Route exact path='/signup/linkedin' component={LinkedIn} />
+        <Route exact path='/signup/password' component={Password} />
         {/* 404 */}
         <Route component={NotFound} />
       </Switch>

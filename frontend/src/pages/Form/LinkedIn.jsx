@@ -1,21 +1,21 @@
 import React from 'react'
 import MultiStepForm from '../../components/Form/MultiStepForm'
-import { FiInstagram } from 'react-icons/fi'
+import { FaLinkedinIn } from 'react-icons/fa'
 
 const Instagram = ({ history }) => {
   return (
     <MultiStepForm
-      title='Create the site with your instagram account'
-      progress={40}
+      title='Awesome! Now you only need your LinkedIn user'
+      progress={60}
       input={{
         placeholder: 'username',
-        name: 'instagram',
+        name: 'linkedin',
         type: 'text'
       }}
-      next='linkedin'
+      next='password'
       history={history}
     >
-      <FiInstagram />
+      <FaLinkedinIn />
     </MultiStepForm>
   )
 }

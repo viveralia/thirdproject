@@ -4,6 +4,7 @@ import styled from 'styled-components'
 /********* CSS ***********/
 /*************************/
 const Form = styled.form`
+  width: 100%;
   div {
     margin-bottom: 1rem;
     input,
@@ -18,6 +19,7 @@ const Form = styled.form`
       background-color: #fff;
       background-clip: padding-box;
       border: 1px solid #ced4da;
+      border-radius: 0;
       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
       text-align: center;
     }
