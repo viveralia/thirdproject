@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import Layout from '../Layout/Layout'
-import Container from '../Grid/Container'
-import Card from '../Cards/Card'
-import SEO from '../SEO/SiteSeo'
-import Progress from './Progress'
-import Form from './Form'
-import Button from '../Buttons/Button'
-import { FiChevronRight } from 'react-icons/fi'
+import Layout from '../components/Layout/Layout'
+import SEO from '../components/SEO/SiteSeo'
+import Container from '../components/Grid/Container'
+import Card from '../components/Cards/Card'
+import Form from '../components/Form/Form'
 import Axios from 'axios'
+import Button from '../components/Buttons/Button'
+import { FiChevronRight, FiLogIn } from 'react-icons/fi'
 
 /*************************/
 /********* CSS ***********/
@@ -19,25 +18,29 @@ const StyledForm = styled.div`
       font-size: 2rem;
     }
   }
-  h1 {
-    font-size: 1.375rem;
-    font-family: var(--serif);
-    font-weight: normal;
-    color: var(--black);
-    margin-bottom: 1rem;
+  .headline {
+    margin-bottom: 2rem;
+    h1 {
+      font-size: 1.375rem;
+      font-family: var(--serif);
+      font-weight: normal;
+      color: var(--black);
+    }
   }
   button {
     display: flex;
     align-items: center;
-    margin: auto;
+    margin: 2.25rem auto 0 auto;
     span {
       font-weight: 600;
       padding-right: 0.25rem;
     }
   }
   @media (min-width: 992px) {
-    h1 {
-      font-size: 1.725rem;
+    .headline {
+      h1 {
+        font-size: 1.725rem;
+      }
     }
   }
 `
@@ -45,24 +48,20 @@ const StyledForm = styled.div`
 /*************************/
 /********* JSX ***********/
 /*************************/
-export default class MultiStepForm extends Component {
+export default class Login extends Component {
   state = {
-    newUser: JSON.parse(localStorage.getItem('newUser')) || {}
+    activeUser: {
+      email: '',
+      password: ''
+    }
   }
 
   /********* FORM METHODS ***********/
-  saveLocalData = e => {
-    e.preventDefault()
-    localStorage.setItem('newUser', JSON.stringify(this.state.newUser))
-    this.props.history.push(`/signup/${this.props.next}`)
-  }
-
   handleInput = e => {
     this.setState({
       newUser: { ...this.state.newUser, [e.target.name]: e.target.value }
     })
   }
-
   handleSubmit = async e => {
     e.preventDefault()
     const { newUser } = this.state
@@ -75,36 +74,45 @@ export default class MultiStepForm extends Component {
   /********* RENDER METHOD ***********/
   render() {
     const {
-      input: { type, name, placeholder },
-      children,
-      title,
-      progress
-    } = this.props
-    const { newUser } = this.state
+      activeUser: { email, password }
+    } = this.state
 
     return (
       <StyledForm>
         <Layout>
-          <SEO title='Sign up' />
+          <SEO title='Log in' />
           <Container type='fullheight'>
             <Card align='center'>
-              <Progress value={progress} max='100' />
-              {/* Icon */}
-              <span>{children}</span>
-              <h1>{title}</h1>
-              <Form onSubmit={name !== 'password' ? this.saveLocalData : this.handleSubmit}>
+              <span>
+                <FiLogIn />
+              </span>
+              <div className='headline'>
+                <h1>Welcome back!</h1>
+                <p>Log in to your account</p>
+              </div>
+              <Form onSubmit={this.handleSubmit}>
                 <div>
                   <input
                     onChange={this.handleInput}
-                    value={newUser.hasOwnProperty(name) ? newUser[`${name}`] : ''}
-                    type={type}
-                    name={name}
-                    placeholder={placeholder}
+                    value={email}
+                    type='email'
+                    name='email'
+                    placeholder='Email'
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    onChange={this.handleInput}
+                    value={password}
+                    type='password'
+                    name='password'
+                    placeholder='Password'
                     required
                   />
                 </div>
                 <Button type='submit' modifier='primary' size='lg'>
-                  <span>Next</span>
+                  <span>Log In</span>
                   <FiChevronRight />
                 </Button>
               </Form>

@@ -6,7 +6,7 @@ const Instagram = ({ history }) => {
   return (
     <MultiStepForm
       title='Awesome! Now you only need your LinkedIn user'
-      progress={60}
+      progress={66.66}
       input={{
         placeholder: 'username',
         name: 'linkedin',

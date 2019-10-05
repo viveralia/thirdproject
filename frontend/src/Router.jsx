@@ -6,12 +6,14 @@ import Email from './pages/Form/Email'
 import Instagram from './pages/Form/Instagram'
 import LinkedIn from './pages/Form/LinkedIn'
 import Password from './pages/Form/Password'
+import Login from './pages/Login'
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path='/' component={Home} />
+        <Route exact path='/login' component={Login} />
         {/* Multistep Form */}
         <Route exact path='/signup/email' component={Email} />
         <Route exact path='/signup/instagram' component={Instagram} />

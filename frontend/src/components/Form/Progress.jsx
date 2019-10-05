@@ -6,13 +6,13 @@ const Progress = styled.progress`
   position: absolute;
   top: 0;
   left: 0;
-  height: 0.325rem;
+  height: 0.425rem;
   z-index: 9;
   ::-webkit-progress-bar {
     background: transparent;
   }
   ::-webkit-progress-value {
-    background: var(--action);
+    background: var(--black);
   }
 `
 

@@ -6,8 +6,8 @@ import styled from 'styled-components'
 const Button = styled.button`
   background: ${props => (props.modifier === 'primary' ? 'var(--black)' : 'transparent')};
   color: ${props => (props.modifier === 'primary' ? '#fff' : 'var(--black)')};
-  padding: 0.5rem 1.571rem;
-  font-size: 0.8125rem;
+  padding: ${props => (props.size === 'lg' ? '0.725rem 1.7571rem' : '0.5rem 1.571rem')};
+  font-size: ${props => (props.size === 'lg' ? '0.825rem' : '0.8125rem')};
   text-transform: uppercase;
   font-weight: 500;
   border: 2px solid var(--black);

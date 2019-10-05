@@ -6,7 +6,7 @@ const Instagram = ({ history }) => {
   return (
     <MultiStepForm
       title='Create the site with your instagram account'
-      progress={40}
+      progress={33.33}
       input={{
         placeholder: 'username',
         name: 'instagram',

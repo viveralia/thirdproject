@@ -6,7 +6,7 @@ const Password = ({ history }) => {
   return (
     <MultiStepForm
       title='Almost there! Just set your password'
-      progress={80}
+      progress={100}
       input={{
         placeholder: '********',
         name: 'password',

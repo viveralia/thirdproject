@@ -4,7 +4,6 @@ import styled from 'styled-components'
 /********* CSS ***********/
 /*************************/
 const Card = styled.section`
-  border: 1px solid #eee;
   background: #fcfcfc;
   padding: 3rem 1.5rem;
   position: relative;
@@ -20,6 +19,7 @@ const Card = styled.section`
   justify-content: center;
   align-items: center;
   @media (min-width: 992px) {
+    border: 1px solid #eee;
     padding: 3rem;
     width: 550px;
     height: initial;
