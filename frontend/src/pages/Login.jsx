@@ -5,9 +5,9 @@ import SEO from '../components/SEO/SiteSeo'
 import Container from '../components/Grid/Container'
 import Card from '../components/Cards/Card'
 import Form from '../components/Form/Form'
-import Axios from 'axios'
 import Button from '../components/Buttons/Button'
 import { FiChevronRight, FiLogIn } from 'react-icons/fi'
+import AUTH_SERVICE from '../services/auth'
 
 /*************************/
 /********* CSS ***********/
@@ -50,7 +50,7 @@ const StyledForm = styled.div`
 /*************************/
 export default class Login extends Component {
   state = {
-    activeUser: {
+    userCredentials: {
       email: '',
       password: ''
     }
@@ -59,22 +59,26 @@ export default class Login extends Component {
   /********* FORM METHODS ***********/
   handleInput = e => {
     this.setState({
-      newUser: { ...this.state.newUser, [e.target.name]: e.target.value }
+      userCredentials: { ...this.state.userCredentials, [e.target.name]: e.target.value }
     })
   }
+
+  logIn = async () => {
+    const { userCredentials } = this.state
+    const { data } = await AUTH_SERVICE.logIn(userCredentials)
+    localStorage.setItem('activeUser', JSON.stringify(data.user))
+    this.props.history.push('/')
+  }
+
   handleSubmit = async e => {
     e.preventDefault()
-    const { newUser } = this.state
-    const { data } = await Axios.post('http://localhost:5000/api/signup', newUser)
-    console.log(data)
-    localStorage.removeItem('newUser')
-    this.props.history.push('/')
+    this.logIn()
   }
 
   /********* RENDER METHOD ***********/
   render() {
     const {
-      activeUser: { email, password }
+      userCredentials: { email, password }
     } = this.state
 
     return (

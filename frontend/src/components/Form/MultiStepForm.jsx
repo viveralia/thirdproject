@@ -8,7 +8,7 @@ import Progress from './Progress'
 import Form from './Form'
 import Button from '../Buttons/Button'
 import { FiChevronRight } from 'react-icons/fi'
-import Axios from 'axios'
+import AUTH_SERVICE from '../../services/auth'
 
 /*************************/
 /********* CSS ***********/
@@ -63,13 +63,23 @@ export default class MultiStepForm extends Component {
     })
   }
 
-  handleSubmit = async e => {
-    e.preventDefault()
+  signUpAndLogIn = async () => {
     const { newUser } = this.state
-    const { data } = await Axios.post('http://localhost:5000/api/signup', newUser)
-    console.log(data)
-    localStorage.removeItem('newUser')
-    this.props.history.push('/')
+    const userCredentials = { email: newUser.email, password: newUser.password }
+    try {
+      await AUTH_SERVICE.signUp(newUser)
+      const { data } = await AUTH_SERVICE.logIn(userCredentials)
+      localStorage.removeItem('newUser')
+      localStorage.setItem('activeUser', JSON.stringify(data.user))
+      this.props.history.push('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    this.signUpAndLogIn()
   }
 
   /********* RENDER METHOD ***********/
