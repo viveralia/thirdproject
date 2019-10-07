@@ -64,8 +64,21 @@ export default class MultiStepForm extends Component {
   }
 
   signUpAndLogIn = async () => {
-    const { newUser } = this.state
-    const userCredentials = { email: newUser.email, password: newUser.password }
+    const { email, instagram, linkedin, password } = this.state.newUser
+    // Structuring the data to be posted
+    const newUser = {
+      email,
+      password,
+      instagram: {
+        username: encodeURI(instagram)
+      },
+      linkedIn: {
+        username: encodeURI(linkedin)
+      }
+    }
+    // Data to be able to auto-login
+    const userCredentials = { email, password }
+    // Request
     try {
       await AUTH_SERVICE.signUp(newUser)
       const { data } = await AUTH_SERVICE.logIn(userCredentials)

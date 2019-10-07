@@ -5,15 +5,24 @@ const userSchema = new Schema(
   {
     email: {
       type: String,
-      unique: true
+      unique: true,
+      required: true
     },
     instagram: {
-      type: String,
-      unique: true
+      username: {
+        type: String,
+        unique: true
+      }
     },
-    linkedin: {
-      type: String,
-      unique: true
+    linkedIn: {
+      username: {
+        type: String,
+        unique: true
+      },
+      profile: {
+        type: Schema.Types.ObjectId,
+        ref: 'LinkedInProfile'
+      }
     }
   },
   {
