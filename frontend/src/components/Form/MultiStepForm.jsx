@@ -26,7 +26,7 @@ const StyledForm = styled.div`
     color: var(--black);
     margin-bottom: 1rem;
   }
-  button {
+  button[type='submit'] {
     display: flex;
     align-items: center;
     margin: auto;

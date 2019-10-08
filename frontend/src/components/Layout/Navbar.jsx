@@ -4,6 +4,8 @@ import ButtonLink from '../Buttons/ButtonLink'
 import { name } from '../../constants/meta.json'
 import styled from 'styled-components'
 import { FiZap } from 'react-icons/fi'
+import Button from '../Buttons/Button'
+import AUTH_SERVICE from '../../services/auth'
 
 /*************************/
 /********* CSS ***********/
@@ -30,7 +32,14 @@ const StyledNav = styled.nav`
 /********* JSX ***********/
 /*************************/
 const Navbar = () => {
-  const [activeUser] = useState(JSON.parse(localStorage.getItem('activeUser')))
+  // React Hook
+  const [activeUser, setUser] = useState(JSON.parse(localStorage.getItem('activeUser')))
+
+  const logOutUser = async () => {
+    await AUTH_SERVICE.logOut()
+    localStorage.removeItem('activeUser')
+    setUser(undefined)
+  }
 
   return (
     <StyledNav>
@@ -40,7 +49,7 @@ const Navbar = () => {
         </span>
         {name}
       </Link>
-      {activeUser ? <ButtonLink to='/logout'>Log out</ButtonLink> : <ButtonLink to='/login'>Log in</ButtonLink>}
+      {activeUser ? <Button onClick={() => logOutUser()}>Log out</Button> : <ButtonLink to='/login'>Log in</ButtonLink>}
     </StyledNav>
   )
 }

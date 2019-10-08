@@ -7,6 +7,7 @@ import Instagram from './pages/Form/Instagram'
 import LinkedIn from './pages/Form/LinkedIn'
 import Password from './pages/Form/Password'
 import Login from './pages/Login'
+import Portfolio from './pages/Portfolio'
 
 const Router = () => {
   return (
@@ -19,6 +20,8 @@ const Router = () => {
         <Route exact path='/signup/instagram' component={Instagram} />
         <Route exact path='/signup/linkedin' component={LinkedIn} />
         <Route exact path='/signup/password' component={Password} />
+        {/* Portfolio */}
+        <Route exact path='/me/:linkedInUser' component={Portfolio} />
         {/* 404 */}
         <Route component={NotFound} />
       </Switch>

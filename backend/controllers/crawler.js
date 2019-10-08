@@ -1,7 +1,6 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
 const jsonframe = require('jsonframe-cheerio')
-const util = require('util')
 const User = require('../models/User')
 const LinkedInProfile = require('../models/LinkedInProfile')
 
@@ -51,7 +50,7 @@ const getJSON = async html => {
           {
             position: 'h3',
             company: 'h4',
-            date_range: {
+            dateRange: {
               start: '.date-range__start-date',
               end: '.date-range__end-date'
             }
@@ -64,7 +63,7 @@ const getJSON = async html => {
           {
             school: 'h3',
             studies: 'h4',
-            date_range: {
+            dateRange: {
               start: '.date-range__start-date',
               end: '.date-range__end-date'
             }
@@ -84,42 +83,19 @@ const crawlProfile = async linkedInUsername => {
   const linkedInProfile = `https://www.linkedin.com/in/${encodeURI(linkedInUsername)}/`
   const { linkedIn } = await getJSON(await getHTML(linkedInProfile))
   return linkedIn
-  // console.log(util.inspect(linkedIn, false, null, true))
 }
 
-exports.registerLinkedInProfile = (req, res) => {
-  // Dummy Data
-  const dummy = {
-    linkedIn: {
-      name: 'Edgar Viveros',
-      headline: 'Designer and MERN Fullstack',
-      location: 'Ciudad de México y alrededores, México',
-      about: 'Designer at days, developer at nights. Self-taught with a little help from my friends and @Platzi.',
-      experience: [
-        {
-          position: 'Digital Designer and Front-End Developer',
-          company: 'Espacio en blanco',
-          date_range: { start: 'ene. de 2017' }
-        },
-        {
-          position: 'Profesor de música',
-          company: 'Tecnológico de Monterrey',
-          date_range: { start: 'ene. de 2013', end: 'ene. de 2015' }
-        }
-      ],
-      education: [
-        {
-          school: 'Platzi',
-          studies: 'Front-end DeveloperDesarrollo de páginas web, contenido digital/multimedia y recursos informáticos',
-          date_range: { start: '2017', end: '2018' }
-        },
-        {
-          school: 'Tecnológico de Monterrey',
-          studies: 'Marketing and CommunicationMarketing',
-          date_range: { start: '2012', end: '2017' }
-        }
-      ]
-    }
+exports.registerLinkedInProfile = async (req, res) => {
+  const linkedIn = await crawlProfile(req.params.username)
+  try {
+    const profile = await LinkedInProfile.create(linkedIn)
+    const user = await User.findByIdAndUpdate(
+      req.params.userId,
+      { linkedIn: { username: req.params.username, profile } },
+      { new: true }
+    )
+    res.status(201).json({ message: 'LinkedIn Profile succesfully linked', user })
+  } catch (error) {
+    res.status(500).json({ error })
   }
-  // TODO: Create the LinkedInProfile file in the DB and reference it inside the User model
 }
