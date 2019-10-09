@@ -1,6 +1,14 @@
 const User = require('../models/User')
 
 exports.getPortfolio = async (req, res) => {
-  const user = await User.find({ 'linkedIn.username': req.params.linkedInUser }).populate('linkedIn.profile')
-  res.status(200).json({ user: user[0] })
+  try {
+    const profile = await User.find({ 'linkedIn.username': req.params.linkedInUser }).populate('linkedIn.profile')
+    res.status(200).json({
+      message: 'Profile found!',
+      linkedIn: profile[0].linkedIn,
+      instagram: profile[0].instagram
+    })
+  } catch (error) {
+    res.status(404).json({ message: 'The profile does not exist' })
+  }
 }
