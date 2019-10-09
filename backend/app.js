@@ -77,6 +77,9 @@ app.locals.title = 'Express - Generated with IronGenerator'
 /***************************/
 /********* ROUTES **********/
 /***************************/
-app.use('/api', require('./routes/api'))
+app.use('/', require('./routes'))
+app.use('/api', require('./routes/auth'))
+app.use('/api', require('./routes/crawler'))
+app.use('/api', require('./routes/portfolio'))
 
 module.exports = app

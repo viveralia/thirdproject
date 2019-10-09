@@ -27,8 +27,12 @@ const config = {
 /************ REQUEST ************/
 /*********************************/
 const getHTML = async url => {
-  const { data: html } = await axios.get(url, config)
-  return html
+  try {
+    const { data: html } = await axios.get(url, config)
+    return html
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 /*********************************/
@@ -80,22 +84,26 @@ const getJSON = async html => {
 /************ CRAWLER ************/
 /*********************************/
 const crawlProfile = async linkedInUsername => {
-  const linkedInProfile = `https://www.linkedin.com/in/${encodeURI(linkedInUsername)}/`
-  const { linkedIn } = await getJSON(await getHTML(linkedInProfile))
-  return linkedIn
+  try {
+    const linkedInProfile = `https://www.linkedin.com/in/${encodeURI(linkedInUsername)}/`
+    const { linkedIn } = await getJSON(await getHTML(linkedInProfile))
+    return linkedIn
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 exports.registerLinkedInProfile = async (req, res) => {
-  const linkedIn = await crawlProfile(req.params.username)
   try {
+    const linkedIn = await crawlProfile(req.user.linkedIn.username)
     const profile = await LinkedInProfile.create(linkedIn)
     const user = await User.findByIdAndUpdate(
-      req.params.userId,
-      { linkedIn: { username: req.params.username, profile } },
+      req.user._id,
+      { linkedIn: { username: req.user.linkedIn.username, profile } },
       { new: true }
     )
     res.status(201).json({ message: 'LinkedIn Profile succesfully linked', user })
   } catch (error) {
-    res.status(500).json({ error })
+    res.status(500).json({ message: 'Something went wrong linking your LinkedIn profile', error })
   }
 }

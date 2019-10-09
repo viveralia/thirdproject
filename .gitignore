@@ -8,3 +8,6 @@ npm-debug.log
 
 # Environment Variables should NEVER be published
 .env
+
+# Initial DB info
+seeds.js
