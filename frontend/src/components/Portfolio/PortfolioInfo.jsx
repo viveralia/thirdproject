@@ -13,10 +13,18 @@ import { FaInstagram, FaLinkedinIn } from 'react-icons/fa'
 /********* CSS ***********/
 /*************************/
 const StyledPortfolio = styled.div`
-  @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:500,600&display=swap');
-  font-family: ${props => props.theme === 'philippe' && "'IBM Plex Sans', sans - serif"};
-  background: ${props => props.theme === 'philippe' && '#dbd0c4'};
-  color: ${props => props.theme === 'philippe' && '#232323'};
+  @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:500,600|IBM+Plex+Sans:500,600&display=swap');
+  font-family: ${props =>
+    props.theme === 'philippe' ? "'IBM Plex Mono', monospace" : "'IBM Plex Sans', sans - serif "};
+  background: ${props => (props.theme === 'philippe' ? '#dbd0c4' : '#222')};
+  color: ${props => (props.theme === 'philippe' ? '#232323' : '#fff')};
+  a {
+    transition: color 0.125s linear;
+    :hover,
+    :focus {
+      color: ${props => props.theme === 'philippe' && '#a79a8d'};
+    }
+  }
   header {
     width: 100%;
     padding: 1.5rem 0;
@@ -30,7 +38,7 @@ const StyledPortfolio = styled.div`
       }
       h3 {
         font-size: 1.125rem;
-        color: ${props => props.theme === 'philippe' && '#a79a8d'};
+        color: ${props => (props.theme === 'philippe' ? '#a79a8d' : '#aaa')};
         font-weight: 500;
       }
     }
@@ -93,7 +101,8 @@ const StyledPortfolio = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    border-top: 1px solid rgba(0, 0, 0, 0.075);
+    border-top: 1px solid
+      ${props => (props.theme === 'philippe' ? 'rgba(0, 0, 0, 0.075)' : 'rgba(2555, 2555, 255, 0.075)')};
     div {
       min-width: 50%;
     }
@@ -106,6 +115,14 @@ const StyledPortfolio = styled.div`
       display: grid;
       grid-template-columns: 30% 70%;
       grid-gap: 3rem;
+      img {
+        transition: all 0.25s ease;
+        will-change: filter transform;
+        :hover {
+          filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.0975));
+          transform: scale(1.009);
+        }
+      }
     }
     footer {
       div {
@@ -137,9 +154,10 @@ export default class PortfolioInfo extends Component {
     const { name, headline, about, education, experience } = this.props.profile.linkedIn.profile
     const { instagram, linkedIn } = this.props.profile
     const { instagramFeed } = this.state
+    const { theme } = this.props
 
     return (
-      <StyledPortfolio theme='philippe'>
+      <StyledPortfolio theme={theme}>
         <SEO title={name} description={about} />
         <Container type='portfolio-fullheight'>
           {/* Header */}
@@ -160,10 +178,22 @@ export default class PortfolioInfo extends Component {
               <Grid sm={1} md={2} spacing='5rem'>
                 {!instagramFeed ? (
                   <>
-                    <InstaLoader primaryColor='#cabaa8' secondaryColor='#c1b19e' />
-                    <InstaLoader primaryColor='#cabaa8' secondaryColor='#c1b19e' />
-                    <InstaLoader primaryColor='#cabaa8' secondaryColor='#c1b19e' />
-                    <InstaLoader primaryColor='#cabaa8' secondaryColor='#c1b19e' />
+                    <InstaLoader
+                      primaryColor={theme === 'philippe' ? '#cabaa8' : '#bbb'}
+                      secondaryColor={theme === 'philippe' ? '#c1b19e' : '#ccc'}
+                    />
+                    <InstaLoader
+                      primaryColor={theme === 'philippe' ? '#cabaa8' : '#bbb'}
+                      secondaryColor={theme === 'philippe' ? '#c1b19e' : '#ccc'}
+                    />
+                    <InstaLoader
+                      primaryColor={theme === 'philippe' ? '#cabaa8' : '#bbb'}
+                      secondaryColor={theme === 'philippe' ? '#c1b19e' : '#ccc'}
+                    />
+                    <InstaLoader
+                      primaryColor={theme === 'philippe' ? '#cabaa8' : '#bbb'}
+                      secondaryColor={theme === 'philippe' ? '#c1b19e' : '#ccc'}
+                    />
                   </>
                 ) : (
                   instagramFeed.media.map(post => (
@@ -207,7 +237,7 @@ export default class PortfolioInfo extends Component {
                 </ul>
               </section>
               <section>
-                <h2>Contact</h2>
+                <h2>Contacto</h2>
                 <ul>
                   <li>
                     <a target='_blank' rel='noopener noreferrer' href={`https://linkedin.com/in/${linkedIn.username}`}>
@@ -216,13 +246,15 @@ export default class PortfolioInfo extends Component {
                       </h3>
                     </a>
                   </li>
-                  <li>
-                    <a target='_blank' rel='noopener noreferrer' href={`https://instagram.com/${instagram.username}`}>
-                      <h3>
-                        <FaInstagram /> <span>Instagram</span>
-                      </h3>
-                    </a>
-                  </li>
+                  {instagram.username && (
+                    <li>
+                      <a target='_blank' rel='noopener noreferrer' href={`https://instagram.com/${instagram.username}`}>
+                        <h3>
+                          <FaInstagram /> <span>Instagram</span>
+                        </h3>
+                      </a>
+                    </li>
+                  )}
                 </ul>
               </section>
             </Grid>

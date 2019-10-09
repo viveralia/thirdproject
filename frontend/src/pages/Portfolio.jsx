@@ -6,7 +6,8 @@ import PortfolioInfo from '../components/Portfolio/PortfolioInfo'
 export default class Portfolio extends Component {
   state = {
     isLoading: true,
-    profile: undefined
+    profile: undefined,
+    theme: 'pascale'
   }
 
   getProfileData = async () => {
@@ -19,9 +20,9 @@ export default class Portfolio extends Component {
   }
 
   render() {
-    const { isLoading, profile } = this.state
+    const { isLoading, profile, theme } = this.state
     const { slug } = this.props.match.params
 
-    return <div>{isLoading ? <Loader slug={slug} /> : <PortfolioInfo profile={profile} />}</div>
+    return <div>{isLoading ? <Loader slug={slug} /> : <PortfolioInfo profile={profile} theme={theme} />}</div>
   }
 }
