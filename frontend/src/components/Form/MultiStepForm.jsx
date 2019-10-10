@@ -9,6 +9,7 @@ import Form from './Form'
 import Button from '../Buttons/Button'
 import { FiChevronRight } from 'react-icons/fi'
 import AUTH_SERVICE from '../../services/auth'
+import Swal from 'sweetalert2'
 
 /*************************/
 /********* CSS ***********/
@@ -84,8 +85,10 @@ export default class MultiStepForm extends Component {
       const { data } = await AUTH_SERVICE.logIn(userCredentials)
       localStorage.removeItem('newUser')
       localStorage.setItem('activeUser', JSON.stringify(data.user))
+      await AUTH_SERVICE.crawlProfile()
       this.props.history.push(`/me/${linkedin}`)
     } catch (error) {
+      Swal.fire("😩 We couldn't link your LinkedIn profile", error.message, 'error')
       console.log(error)
     }
   }
