@@ -21,7 +21,7 @@ const Router = () => {
         <Route exact path='/signup/linkedin' component={LinkedIn} />
         <Route exact path='/signup/password' component={Password} />
         {/* Portfolio */}
-        <Route exact path='/me/:slug' component={Portfolio} />
+        <Route exact path='/me/:linkedInUsername' component={Portfolio} />
         {/* 404 */}
         <Route component={NotFound} />
       </Switch>

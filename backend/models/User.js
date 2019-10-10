@@ -23,6 +23,10 @@ const userSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: 'LinkedInProfile'
       }
+    },
+    config: {
+      type: Schema.Types.ObjectId,
+      ref: 'Config'
     }
   },
   {

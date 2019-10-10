@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import Axios from 'axios'
 import Loader from '../components/Portfolio/Loader'
 import PortfolioInfo from '../components/Portfolio/PortfolioInfo'
+import PORTFOLIO_SERVICE from '../services/portfolio'
 
 export default class Portfolio extends Component {
   state = {
     isLoading: true,
     profile: undefined,
-    theme: 'philippe'
+    theme: 'pascale'
   }
 
   getProfileData = async () => {
-    const { data } = await Axios.get(`http://localhost:5000/api/portfolio/${this.props.match.params.slug}`)
+    const { linkedInUsername } = this.props.match.params
+    const { data } = await PORTFOLIO_SERVICE.getPortfolio(linkedInUsername)
     this.setState({ isLoading: false, profile: data })
   }
 
