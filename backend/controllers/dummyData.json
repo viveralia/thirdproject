@@ -1,0 +1,15 @@
+{
+  "name": "Your name",
+  "headline": "Your headline",
+  "location": "Your location",
+  "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet ultrices eros, eu tincidunt nisi.",
+  "experience": [
+    { "position": "Position", "company": "Company", "dateRange": { "start": "feb. de 2018", "end": "mar. de 2019" } },
+    {
+      "position": "Position 2",
+      "company": "Company 2",
+      "dateRange": { "start": "feb. de 2017", "end": "ene. de 2018" }
+    }
+  ],
+  "education": [{ "school": "School", "studies": "Degree", "dateRange": { "start": "2013", "end": "2017" } }]
+}

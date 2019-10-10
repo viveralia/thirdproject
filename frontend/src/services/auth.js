@@ -7,6 +7,9 @@ const AUTH_SERVICE = {
   signUp: async newUser => {
     return await SERVICE.post('/signup', newUser)
   },
+  crawlProfile: async () => {
+    return await SERVICE.get('/crawlLinkedIn')
+  },
   logIn: async credentials => {
     return await SERVICE.post('/login', credentials)
   },

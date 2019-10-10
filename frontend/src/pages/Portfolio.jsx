@@ -7,7 +7,7 @@ export default class Portfolio extends Component {
   state = {
     isLoading: true,
     profile: undefined,
-    theme: 'pascale'
+    theme: 'philippe'
   }
 
   getProfileData = async () => {

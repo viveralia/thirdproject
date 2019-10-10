@@ -3,6 +3,7 @@ const cheerio = require('cheerio')
 const jsonframe = require('jsonframe-cheerio')
 const User = require('../models/User')
 const LinkedInProfile = require('../models/LinkedInProfile')
+const dummy = require('./dummyData.json')
 
 /*********************************/
 /************ HEADERS ************/
@@ -93,15 +94,24 @@ const crawlProfile = async linkedInUsername => {
   }
 }
 
-exports.registerLinkedInProfile = async (req, res) => {
+exports.registerLinkedInProfile = async (req, res, next) => {
   try {
     const linkedIn = await crawlProfile(req.user.linkedIn.username)
     const profile = await LinkedInProfile.create(linkedIn)
-    const user = await User.findByIdAndUpdate(
-      req.user._id,
-      { linkedIn: { username: req.user.linkedIn.username, profile } },
-      { new: true }
-    )
+    let user
+    if (profile) {
+      user = await User.findByIdAndUpdate(
+        req.user._id,
+        { linkedIn: { username: req.user.linkedIn.username, profile } },
+        { new: true }
+      )
+    } else {
+      user = await User.findByIdAndUpdate(
+        req.user._id,
+        { linkedIn: { username: req.user.linkedIn.username, profile: dummy } },
+        { new: true }
+      )
+    }
     res.status(201).json({ message: 'LinkedIn Profile succesfully linked', user })
   } catch (error) {
     res.status(500).json({ message: 'Something went wrong linking your LinkedIn profile', error })

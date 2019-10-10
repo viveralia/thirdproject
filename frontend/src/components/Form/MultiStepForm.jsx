@@ -84,7 +84,7 @@ export default class MultiStepForm extends Component {
       const { data } = await AUTH_SERVICE.logIn(userCredentials)
       localStorage.removeItem('newUser')
       localStorage.setItem('activeUser', JSON.stringify(data.user))
-      this.props.history.push('/')
+      this.props.history.push(`/me/${linkedin}`)
     } catch (error) {
       console.log(error)
     }
