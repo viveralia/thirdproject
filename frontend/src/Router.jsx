@@ -8,6 +8,7 @@ import LinkedIn from './pages/Form/LinkedIn'
 import Password from './pages/Form/Password'
 import Login from './pages/Login'
 import Portfolio from './pages/Portfolio'
+import PortfolioEdit from './pages/PortfolioEdit'
 
 const Router = () => {
   return (
@@ -22,7 +23,7 @@ const Router = () => {
         <Route exact path='/signup/password' component={Password} />
         {/* Portfolio */}
         <Route exact path='/me/:linkedInUsername' component={Portfolio} />
-        <Route exact path='/me/:linkedInUsername/edit' component={Portfolio} />
+        <Route exact path='/me/:linkedInUsername/edit' component={PortfolioEdit} />
         {/* 404 */}
         <Route component={NotFound} />
       </Switch>

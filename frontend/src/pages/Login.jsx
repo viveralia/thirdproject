@@ -27,7 +27,7 @@ const StyledForm = styled.div`
       color: var(--black);
     }
   }
-  button {
+  .fullheight button {
     display: flex;
     align-items: center;
     margin: 2.25rem auto 0 auto;
