@@ -81,5 +81,7 @@ app.use('/', require('./routes'))
 app.use('/api', require('./routes/auth'))
 app.use('/api', require('./routes/crawler'))
 app.use('/api', require('./routes/portfolio'))
+app.use('/api', require('./routes/user'))
+app.use('/api', require('./routes/config'))
 
 module.exports = app

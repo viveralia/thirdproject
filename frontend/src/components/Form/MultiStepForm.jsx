@@ -10,6 +10,7 @@ import Button from '../Buttons/Button'
 import { FiChevronRight } from 'react-icons/fi'
 import AUTH_SERVICE from '../../services/auth'
 import Swal from 'sweetalert2'
+import CONFIG_SERVICE from '../../services/config'
 
 /*************************/
 /********* CSS ***********/
@@ -87,6 +88,8 @@ export default class MultiStepForm extends Component {
       localStorage.setItem('activeUser', JSON.stringify(data.user))
       // LinkedIn Scraper
       await AUTH_SERVICE.crawlProfile()
+      // Initial Config
+      await CONFIG_SERVICE.createConfig()
       this.props.history.push(`/me/${linkedin}/edit`)
     } catch (error) {
       Swal.fire('😩 Try again later ', "We couldn't link your LinkedIn profile", 'error')
