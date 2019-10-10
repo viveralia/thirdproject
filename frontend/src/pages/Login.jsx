@@ -67,7 +67,7 @@ export default class Login extends Component {
     const { userCredentials } = this.state
     const { data } = await AUTH_SERVICE.logIn(userCredentials)
     localStorage.setItem('activeUser', JSON.stringify(data.user))
-    this.props.history.push('/')
+    this.props.history.push(`/me/${data.user.linkedIn.username}/edit`)
   }
 
   handleSubmit = async e => {

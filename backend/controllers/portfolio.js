@@ -1,6 +1,5 @@
 const User = require('../models/User')
 const LinkedInProfile = require('../models/LinkedInProfile')
-const dummy = require('./dummyData.json')
 
 // Read
 exports.getPortfolio = async (req, res) => {
@@ -16,6 +15,24 @@ exports.getPortfolio = async (req, res) => {
   }
 }
 
+// Update
 exports.updatePortfolio = async (req, res) => {
-  await LinkedInProfile.findByIdAndUpdate(profileId, req.body)
+  try {
+    const { profile } = req.user.linkedIn
+    const updatedProfile = await LinkedInProfile.findByIdAndUpdate(profile, req.body, { new: true })
+    res.status(200).json({ message: 'Update successful', updatedProfile })
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong', error })
+  }
+}
+
+// Delete
+exports.deletePortfolio = async (req, res) => {
+  try {
+    const { portfolioId } = req.params
+    const profileDeleted = await LinkedInProfile.findByIdAndDelete(portfolioId)
+    res.status(200).json({ message: 'Delete successful', profileDeleted })
+  } catch (error) {
+    res.status(500).json({ message: 'Somehting went worng', error })
+  }
 }

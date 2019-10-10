@@ -85,10 +85,11 @@ export default class MultiStepForm extends Component {
       const { data } = await AUTH_SERVICE.logIn(userCredentials)
       localStorage.removeItem('newUser')
       localStorage.setItem('activeUser', JSON.stringify(data.user))
+      // LinkedIn Scraper
       await AUTH_SERVICE.crawlProfile()
-      this.props.history.push(`/me/${linkedin}`)
+      this.props.history.push(`/me/${linkedin}/edit`)
     } catch (error) {
-      Swal.fire("😩 We couldn't link your LinkedIn profile", error.message, 'error')
+      Swal.fire('😩 Try again later ', "We couldn't link your LinkedIn profile", 'error')
       console.log(error)
     }
   }

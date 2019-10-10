@@ -22,6 +22,7 @@ const Router = () => {
         <Route exact path='/signup/password' component={Password} />
         {/* Portfolio */}
         <Route exact path='/me/:linkedInUsername' component={Portfolio} />
+        <Route exact path='/me/:linkedInUsername/edit' component={Portfolio} />
         {/* 404 */}
         <Route component={NotFound} />
       </Switch>

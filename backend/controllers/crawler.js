@@ -94,6 +94,7 @@ const crawlProfile = async linkedInUsername => {
   }
 }
 
+// Create
 exports.registerLinkedInProfile = async (req, res, next) => {
   try {
     const linkedIn = await crawlProfile(req.user.linkedIn.username)
