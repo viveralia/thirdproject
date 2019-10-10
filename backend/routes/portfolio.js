@@ -4,6 +4,6 @@ const { getPortfolio, updatePortfolio, deletePortfolio } = require('../controlle
 // Portfolio CRUD
 router.get('/portfolio/:linkedInUser', getPortfolio)
 router.put('/portfolio', updatePortfolio)
-router.delete('/portfolio/:portfolioId', deletePortfolio)
+router.delete('/portfolio', deletePortfolio)
 
 module.exports = router

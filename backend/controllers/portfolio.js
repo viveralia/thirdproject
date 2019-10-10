@@ -31,8 +31,8 @@ exports.updatePortfolio = async (req, res) => {
 // Delete
 exports.deletePortfolio = async (req, res) => {
   try {
-    const { portfolioId } = req.params
-    const profileDeleted = await LinkedInProfile.findByIdAndDelete(portfolioId)
+    const { profile } = req.user.linkedIn
+    const profileDeleted = await LinkedInProfile.findByIdAndDelete(profile)
     res.status(200).json({ message: 'Delete successful', profileDeleted })
   } catch (error) {
     res.status(500).json({ message: 'Somehting went worng', error })
