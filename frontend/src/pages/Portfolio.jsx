@@ -6,14 +6,13 @@ import PORTFOLIO_SERVICE from '../services/portfolio'
 export default class Portfolio extends Component {
   state = {
     isLoading: true,
-    profile: undefined,
-    theme: 'pascale'
+    profile: undefined
   }
 
   getProfileData = async () => {
     const { linkedInUsername } = this.props.match.params
     const { data } = await PORTFOLIO_SERVICE.getPortfolio(linkedInUsername)
-    this.setState({ isLoading: false, profile: data })
+    this.setState({ isLoading: false, profile: data.profile })
   }
 
   componentDidMount() {
@@ -21,9 +20,9 @@ export default class Portfolio extends Component {
   }
 
   render() {
-    const { isLoading, profile, theme } = this.state
-    const { slug } = this.props.match.params
+    const { isLoading, profile } = this.state
+    const { linkedInUsername } = this.props.match.params
 
-    return <div>{isLoading ? <Loader slug={slug} /> : <PortfolioInfo profile={profile} theme={theme} />}</div>
+    return <>{isLoading ? <Loader slug={linkedInUsername} /> : <PortfolioInfo profile={profile} />}</>
   }
 }

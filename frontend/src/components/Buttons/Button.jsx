@@ -15,6 +15,7 @@ const Button = styled.button`
   display: inline-block;
   position: relative;
   cursor: pointer;
+  appearance: none;
   ::after {
     content: '';
     position: absolute;

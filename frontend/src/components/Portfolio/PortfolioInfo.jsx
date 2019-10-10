@@ -18,6 +18,8 @@ const StyledPortfolio = styled.div`
     props.theme === 'philippe' ? "'IBM Plex Mono', monospace" : "'IBM Plex Sans', sans - serif "};
   background: ${props => (props.theme === 'philippe' ? '#dbd0c4' : '#222')};
   color: ${props => (props.theme === 'philippe' ? '#232323' : '#fff')};
+  overflow: hidden;
+  width: 100%;
   a {
     transition: color 0.125s linear;
     :hover,
@@ -154,7 +156,7 @@ export default class PortfolioInfo extends Component {
     const { name, headline, about, education, experience } = this.props.profile.linkedIn.profile
     const { instagram, linkedIn } = this.props.profile
     const { instagramFeed } = this.state
-    const { theme } = this.props
+    const { theme } = this.props.profile.config
 
     return (
       <StyledPortfolio theme={theme}>
