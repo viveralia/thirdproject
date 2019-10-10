@@ -6,9 +6,11 @@ import AUTH_SERVICE from '../services/auth'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { FiHome, FiLogOut } from 'react-icons/fi'
+import { FaWhatsapp } from 'react-icons/fa'
 import Button from '../components/Buttons/Button'
 import Grid from '../components/Grid/Grid'
 import CONFIG_SERVICE from '../services/config'
+import Swal from 'sweetalert2'
 
 /*************************/
 /********* CSS ***********/
@@ -45,6 +47,10 @@ const StyledSidebar = styled.aside`
         align-items: center;
         font-weight: 600;
         color: var(--black);
+        margin-bottom: 1rem;
+        :last-child {
+          margin-bottom: none;
+        }
         svg {
           margin-right: 0.75rem;
           font-size: 1.25rem;
@@ -209,6 +215,14 @@ export default class PortfolioEdit extends Component {
     await PORTFOLIO_SERVICE.updatePortfolio(profile)
     const { config } = this.state.profile
     await CONFIG_SERVICE.updateConfig(config)
+    Swal.fire({
+      position: 'top-end',
+      type: 'success',
+      title: 'Changes saved successfully',
+      showConfirmButton: false,
+      toast: true,
+      timer: 2000
+    })
   }
 
   logOutUser = async () => {
@@ -220,6 +234,7 @@ export default class PortfolioEdit extends Component {
   render() {
     const { isLoading, profile } = this.state
     const { linkedInUsername } = this.props.match.params
+    console.log(window.locaton)
 
     return (
       <>
@@ -234,6 +249,16 @@ export default class PortfolioEdit extends Component {
                   <Link to={`/me/${this.props.match.params.linkedInUsername}`}>
                     <FiHome /> Visit your site
                   </Link>
+                  <a
+                    href={`https://wa.me/?text=${encodeURI(`${window.location}`).substring(
+                      0,
+                      encodeURI(window.location).length - 5
+                    )}`}
+                    rel='noopener noreferrer'
+                    target='_blank'
+                  >
+                    <FaWhatsapp /> Share your site
+                  </a>
                 </section>
                 {/* Theme */}
                 <section>
