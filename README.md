@@ -1,8 +1,10 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2d435f38-5206-481d-83bb-7bb8ff4075b6/deploy-status)](https://app.netlify.com/sites/showcase-app/deploys)
+
 # Showcase
 
 ![Showcase landing page](https://i.ibb.co/HCy70B1/Captura-de-Pantalla-2019-10-10-a-la-s-11-26-45.png)
 
-[Showcase](https://sleepy-boyd-6f9c5e.netlify.com/) is an app to build amazing portfolios with a couple of clicks. Why bothering downloading your assets from Instagram and copying your experience and education from LinkedIn when you can let JavaScript handle that request. Ba dum tss! 🥁
+[Showcase](https://showcase-app.netlify.app/) is an app to build amazing portfolios with a couple of clicks. Why bothering downloading your assets from Instagram and copying your experience and education from LinkedIn when you can let JavaScript handle that request. Ba dum tss! 🥁
 
 ## How does it work?
 Showcase will only ask a few usernames when signing up and will scrap your data from the web (Instagram and LinkedIn) using [axios](https://github.com/axios/axios) requests from the server and parsing the data with [cheerio](https://cheerio.js.org/). The app also includes an array of user agents to mimic different browsers on each request and by making it more difficult for the scraped page to detect the bot.
@@ -40,4 +42,4 @@ You can update the name, headline, about and change the theme color (more custom
 ## What's next?
 The idea can be replicated not only for designers or photographers, but also small and medium size businesses by crawling or getting the API from Google My Business, Facebook Pages, Dribble, Behance, and many more.
 
-### Feel free to try the demo by [clicking here](https://sleepy-boyd-6f9c5e.netlify.com/) 👈
+### Feel free to try the demo by [clicking here](https://showcase-app.netlify.app/) 👈
